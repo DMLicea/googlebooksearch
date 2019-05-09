@@ -1,4 +1,4 @@
-/// THIS SHOULD BE FINE, DO NOT TOUCH THIS ANY MORE
+// NO MORE EDITS NECESSARY
 
 const mongoose = require("mongoose");
 
@@ -10,7 +10,7 @@ const BookSchema = new Schema({
     
     authors: {type: String, require: true},
     
-    description: {type: String, require: true},
+    description: String,
     
     img: {type: String, reuire: true},
 

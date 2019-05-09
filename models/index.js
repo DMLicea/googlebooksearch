@@ -1,7 +1,7 @@
-/// THIS SHOULD BE FINE, DO NOT TOUCH THIS ANY MORE
+// NO MORE EDITS NECESSARY
 
 module.exports = {
 
-    Book: require("../models/Book")
+    Book: require("./Book")
 
 }
