@@ -1,0 +1,40 @@
+.navbar-fixed-bottom, .navbar-fixed-top{
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    position: fixed;
+
+    }
+
+.navbar li {
+
+    display: inline-block;
+    text-align: center;
+
+  }
+
+  
+  .navbar {
+
+    background-color: black;
+
+  }
+
+  .title {
+
+    color: red;
+  }
+
+  .saved {
+
+    color: blue;
+  }
+  
+  li {
+
+    padding: 15px 0;
+  }
+  
+  body {
+    font-size: 20px;
+  }

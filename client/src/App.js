@@ -1,23 +1,39 @@
 import React from "react";
 
-import Books from "./pages/Books";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import Books from "./components/Books";
+
+import Jumbotron from "./components/Jumbotron";
 
 import Nav from "./components/Nav";
-
 
 function App() {
 
   return (
 
-    <div>
+    <Router>
 
-      <Nav />
-      
-      <Books />
-    
-    </div>
+      <div>
+
+        <Nav />
+
+        <Jumbotron />
+
+        <Switch>
+
+          <Route exact path="/" component={Books} />
+
+          <Route exact path="/books" component={Books} />
+
+        </Switch>
+
+      </div>
+
+    </Router>
+
   );
 
-}
+};
 
 export default App;

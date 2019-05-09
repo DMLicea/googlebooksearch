@@ -2,6 +2,6 @@
 
 module.exports = {
 
-    Book: require("./Book")
+    Book: require("./book")
 
 }
