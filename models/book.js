@@ -1,3 +1,4 @@
+/// THIS SHOULD BE FINE, DO NOT TOUCH THIS ANY MORE
 
 const mongoose = require("mongoose");
 
@@ -5,15 +6,15 @@ const Schema = mongoose.Schema;
 
 const BookSchema = new Schema({
 
-    title: String,
+    title: {type: String, require: true},
     
-    authors: [String],
+    authors: {type: String, require: true},
     
-    description: String,
+    description: {type: String, require: true},
     
-    img: {type: {String},},
+    img: {type: String, reuire: true},
 
-    link: {type: String,}
+    link: {type: String, require: true},
 
 });
 
