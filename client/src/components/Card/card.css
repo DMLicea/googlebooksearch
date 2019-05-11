@@ -1,0 +1,14 @@
+.card-header {
+
+    text-align: center;
+    background-color: black;
+    color: white;
+    width: 70%;
+    margin: auto;
+}
+
+#body {
+
+    width: 70%;
+    margin: auto;
+}

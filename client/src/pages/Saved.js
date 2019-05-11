@@ -12,12 +12,16 @@ class Saved extends Component {
   };
 
   // grab the books from /api/books
+
   componentDidMount() {
+
     API.getBooks()
-      .then(res => this.setState(
-        { 
+      
+    .then(res => this.setState(
+        
+      { 
           books: res.data 
-        },
+      },
         console.log(res.data)
         )
       )
@@ -25,19 +29,29 @@ class Saved extends Component {
   }
 
   // loads all books
+  
   loadBooks = () => {
+    
     API.getBooks()
-      .then(res =>
-        this.setState({ books: res.data })
+      
+    .then(res =>
+        
+      this.setState({ books: res.data })
+      
       )
       .catch(err => console.log(err));
-  };
+  
+    };
 
   // deletes a book
   handleDeleteBook = id => {
+    
     API.deleteBook(id)
-      .then(res => this.loadBooks())
-      .catch(err => console.log(err));
+      
+    .then(res => this.loadBooks())
+      
+    .catch(err => console.log(err));
+  
   }
 
   render() {
