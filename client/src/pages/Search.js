@@ -51,66 +51,122 @@ class Books extends Component {
   // saves book to database
   handleSaveBook = bookData => {
     API.saveBook(bookData)
-      .then(res => alert("Book Saved!"))
+      .then(res => alert("You have saved this book!"))
       .catch(err => console.log(err));
   };
 
   render() {
+    
     return (
+      
       <Container>
+        
         <Row>
+          
           <Col size="md-12">
+            
             <Jumbotron />
+          
           </Col>
+        
         </Row>
+        
         <Row>
+          
           <Col size="md-12">
+            
             <Card heading="Google Books Search">
+              
               <BookForm
+                
                 value={this.state.search}
+                
                 handleInputChange={this.handleInputChange}
+                
                 handleFormSubmit={this.handleFormSubmit}
+              
               />
+            
             </Card>
+          
           </Col>
+        
         </Row>
+        
         <Row>
+          
           <Col size="md-12">
+            
             {this.state.books.length ? (
+              
               <Card heading="Results">
+                
                 {this.state.books.map(book => (
+                  
                   <Booksz
-                    key={book.id}
-                    src={book.volumeInfo.imageLinks 
-                      ? book.volumeInfo.imageLinks.thumbnail
-                      : "http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/book-icon.png"}
+                    
+                  key={book.id}
+                    
+                  src={book.volumeInfo.imageLinks 
+                      
+                    ? book.volumeInfo.imageLinks.thumbnail
+                      
+                    : "http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/book-icon.png"}
+                    
                     title={book.volumeInfo.title}
+                    
                     authors={book.volumeInfo.authors
+                      
                       ? book.volumeInfo.authors.join(", ")
+                      
                       : "N/A"}
-                    date={book.volumeInfo.publishedDate}
-                    description={book.volumeInfo.description}
-                    link={book.volumeInfo.infoLink}
-                    handleSaveBook={() => this.handleSaveBook({ 
-                      title: book.volumeInfo.title,
-                      src: book.volumeInfo.imageLinks 
+                    
+                      date={book.volumeInfo.publishedDate}
+                    
+                      description={book.volumeInfo.description}
+                    
+                      link={book.volumeInfo.infoLink}
+                    
+                      handleSaveBook={() => this.handleSaveBook({ 
+                    
+                        title: book.volumeInfo.title,
+                      
+                        src: book.volumeInfo.imageLinks 
+                        
                         ? book.volumeInfo.imageLinks.thumbnail 
+                        
                         : "http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/book-icon.png",
-                      authors: book.volumeInfo.authors,
-                      date: book.volumeInfo.publishedDate,
-                      description: book.volumeInfo.description,
-                      link: book.volumeInfo.infoLink})}
+                      
+                        authors: book.volumeInfo.authors,
+                      
+                        date: book.volumeInfo.publishedDate,
+                      
+                        description: book.volumeInfo.description,
+                      
+                        link: book.volumeInfo.infoLink})}
+                  
                   />
+                
                 ))}
+              
               </Card>
+            
             ) : (
+              
               <Card heading="Search Results"></Card>
+            
             )}
+          
           </Col>
+        
         </Row>
+      
       </Container>
+    
     );
+  
   }
+
 }
 
 export default Books;

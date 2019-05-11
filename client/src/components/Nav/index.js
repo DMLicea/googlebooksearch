@@ -13,7 +13,7 @@ function Nav() {
       
       </a>
 
-      <a className="navbar-brand" id = "saved" href="savedbooks">
+      <a className="navbar-brand" id = "saved" href="saved">
         
         Saved Books
       

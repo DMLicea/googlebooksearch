@@ -1,14 +1,13 @@
-
 import React from "react";
-import "./booksz.css";
 
+const BookszSaved = props => {
 
-const Booksz = props => {
   return (
+    
     <span>
-      <div className="full">
-      <div className="col-md-4" id="thestuff" style={{ marginTop: "20px" }}>
-
+      
+      <div className="col-md-4" style={{ float: "left", marginTop: "20px" }}>
+        
         <p><img alt={props.title} className="img-fluid" src={props.src} style={{ margin: "0 auto" }} /></p>
         
         <p style={{ fontSize: "30px" }}>{props.title}</p>
@@ -18,13 +17,17 @@ const Booksz = props => {
         <p><strong>Publish Date:</strong> {props.date}</p>
         
         <p><strong>Google Books Link:</strong> <a href={props.link} target={"_blank"} >{props.title}</a></p>
-
+        
         <button onClick={props.link} className="btn btn-warning save-btn" style={{ marginBottom: "30px"}}>
-          View
+        
+           View
+        
         </button>
         
-        <button onClick={props.handleSaveBook} className="btn btn-warning save-btn" style={{ marginBottom: "30px"}}>
-          Save
+        <button onClick={props.handleDeleteBook} className="btn btn-warning delete-btn" style={{ marginBottom: "30px"}}>
+        
+          Delete
+        
         </button>
       
       </div>
@@ -36,11 +39,11 @@ const Booksz = props => {
       </div>
       
       <hr style={{ clear: "both" }} />
-
-      </div>
     
     </span>
+  
   );
+
 }
 
-export default Booksz;
+export default BookszSaved;

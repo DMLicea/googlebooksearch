@@ -1,0 +1,17 @@
+.full {
+
+    margin: auto;
+    height:10%;
+    width:100%;
+    border:5px;
+    border-style: dashed;
+    border-color:black;
+    scrollbar-color: #da923c;
+    overflow:auto;
+
+}
+
+#thestuff {
+
+    text-align: center;
+}
