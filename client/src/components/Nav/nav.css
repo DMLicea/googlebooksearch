@@ -10,6 +10,7 @@
 
     display: inline-block;
     text-align: center;
+    
 
   }
 
@@ -17,15 +18,17 @@
   .navbar {
 
     background-color: black;
+    padding: 12px;
 
   }
 
-  .title {
+  #title {
 
     color: red;
+    padding-right: 10px;
   }
 
-  .saved {
+  #saved {
 
     color: blue;
   }
