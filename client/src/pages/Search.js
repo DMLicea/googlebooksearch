@@ -50,6 +50,7 @@ class Books extends Component {
 
   // saves book to database
   handleSaveBook = bookData => {
+    // console.log(bookData);
     API.saveBook(bookData)
       .then(res => alert("You have saved this book!"))
       .catch(err => console.log(err));
@@ -115,11 +116,7 @@ class Books extends Component {
                     
                     title={book.volumeInfo.title}
                     
-                    authors={book.volumeInfo.authors
-                      
-                      ? book.volumeInfo.authors.join(", ")
-                      
-                      : "N/A"}
+                    author={book.author}
                     
                       date={book.volumeInfo.publishedDate}
                     
@@ -137,7 +134,7 @@ class Books extends Component {
                         
                         : "http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/book-icon.png",
                       
-                        authors: book.volumeInfo.authors,
+                        author: book.volumeInfo.author,
                       
                         date: book.volumeInfo.publishedDate,
                       

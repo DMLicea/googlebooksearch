@@ -18,11 +18,11 @@ const BookszSaved = props => {
         
         <p><strong>Google Books Link:</strong> <a href={props.link} target={"_blank"} >{props.title}</a></p>
         
-        <button onClick={props.link} className="btn btn-warning save-btn" style={{ marginBottom: "30px"}}>
+        <a href={props.link} className="btn btn-warning save-btn" style={{ marginBottom: "30px"}}>
         
            View
         
-        </button>
+        </a>
         
         <button onClick={props.handleDeleteBook} className="btn btn-warning delete-btn" style={{ marginBottom: "30px"}}>
         

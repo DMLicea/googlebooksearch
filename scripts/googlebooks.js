@@ -9,6 +9,8 @@ mongoose.connect(
   "mongodb://localhost/googlebooks"
 );
 
+console.log("Database online.")
+
 const bookSeed = [];
 
 db.Book
