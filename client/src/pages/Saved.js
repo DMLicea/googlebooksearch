@@ -87,7 +87,7 @@ class Saved extends Component {
                     
                     title={book.title}
                     
-                    authors={book.authors.join(", ")}
+                    author={book.author}
                     
                     date={book.date}
                     
@@ -104,7 +104,11 @@ class Saved extends Component {
             
             ) : (
               
-              <Card heading="Saved Books"></Card>
+              <Card heading="Saved Books">
+
+              <p>testtesttest</p>
+              
+              </Card>
             
             )}
           
