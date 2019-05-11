@@ -3,7 +3,7 @@ import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { Input, FormBtn } from "../components/BookForm";
 import Jumbotron from "../components/Jumbotron";
-import Booksz from '../components/Booksz';
+// import Booksz from '../components/Booksz';
 
 class Search extends Component {
 
@@ -85,7 +85,7 @@ class Search extends Component {
            
         </Row>
 
-<Row>
+{/* <Row>
 <Col md={12}>
       <h3>
         <strong>
@@ -93,18 +93,9 @@ class Search extends Component {
         </strong>
       </h3>
 
-      {!this.state.books.length ? (
-        <h2 className="text-center">Search for a Book to Begin!</h2>
-      ) : (
-        <Booksz
-          books={this.state.books}
-          handleBookAction={this.handleBookAction}
-          action={this.state.action}
-        />
-      )}
 
 </Col>
-</Row>
+</Row> */}
 
 </Container>
 

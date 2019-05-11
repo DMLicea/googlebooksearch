@@ -1,7 +1,7 @@
 
 import React from "react";
 import { FormBtn } from "../components/BookForm";
-import List from '../components/BookList';
+import {List } from "../components/BookList";
 import { Col, Row } from "../components/Grid";
 
 function Booksz(props) {
