@@ -3,8 +3,8 @@
 // import {Row, Col} from "../Grid"
 //import { Link } from "react-router-dom";
 
-class Search 
+// class Search 
 //extends Component 
 {}
 
-export default Search;
+// export default Search;
