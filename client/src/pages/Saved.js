@@ -1,87 +1,75 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import { Link } from "react-router-dom";
-import { Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/BookList";
-import Jumbotron from "../components/Jumbotron";
+import { Row, Container, Col } from "../components/Grid";
+import Card from "../components/Card";
+import Booksz from "../components/Booksz";
+// import { Link } from "react-router-dom";
+
 
 class Saved extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    books: []
+  };
 
-    this.loadBooks = this.loadBooks.bind(this);
-    this.handleBookAction = this.handleBookAction.bind(this);
-
-    this.state = {
-      pageTag: 'Your Saved Books of Interest',
-      action: 'delete',
-      books: []
-    };
-  }
-
-  /**
-   * On successful rendering of the page, get all saved books from the
-   * backend.
-   */
+  // grab the books from /api/books
   componentDidMount() {
-    this.loadBooks();
+    API.getBooks()
+      .then(res => this.setState(
+        { 
+          books: res.data 
+        },
+        console.log(res.data)
+        )
+      )
+      .catch(err => console.log(err));
   }
 
-  loadBooks() {
+  // loads all books
+  loadBooks = () => {
+    API.getBooks()
+      .then(res =>
+        this.setState({ books: res.data })
+      )
+      .catch(err => console.log(err));
+  };
 
-    API.getSavedBooks()
-
-      .then((res) => {
-
-        const bookList = res.data;
-
-        this.setState({ books: bookList });
-
-      })
-
-      .catch((error) => console.log(error));
-  }
-
-
-  handleBookAction(id) {
-
+  // deletes a book
+  handleDeleteBook = id => {
     API.deleteBook(id)
-
-      .then(() => this.loadBooks())
-
-      .catch((error) => console.log(error));
+      .then(res => this.loadBooks())
+      .catch(err => console.log(err));
   }
 
-  /**
-   * Render the page elements.
-   */
   render() {
     return (
-      <Container fluid>
+      <Container>
         <Row>
-            <Jumbotron>
-              <h1>Books On My List</h1>
-            </Jumbotron>
+          <Col size="md-12">
             {this.state.books.length ? (
-              <List>
+              <Card heading="Saved Books">
                 {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
-                    </Link>
-                    {/* <DeleteBtn onClick={() => this.deleteBook(book._id)} /> */}
-                  </ListItem>
+                  <Booksz
+                    key={book._id}
+                    src={book 
+                      ? book.src 
+                      : "http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/book-icon.png"}
+                    title={book.title}
+                    authors={book.authors.join(", ")}
+                    date={book.date}
+                    description={book.description}
+                    link={book.link}
+                    handleDeleteBook={() => this.handleDeleteBook(book._id)}
+                  />
                 ))}
-              </List>
+              </Card>
             ) : (
-              <h3>No Results to Display</h3>
+              <Card heading="Saved Books"></Card>
             )}
-
+          </Col>
         </Row>
-      </Container>    
-      )
-  }};
+      </Container>
+    );
+  }
+}
 
 export default Saved;

@@ -1,107 +1,116 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
-import { Input, FormBtn } from "../components/BookForm";
+import BookForm from "../components/BookForm";
 import Jumbotron from "../components/Jumbotron";
-// import Booksz from '../components/Booksz';
+import Card from "../components/Card";
+import Booksz from "../components/Booksz";
 
-class Search extends Component {
+class Books extends Component {
+  state = {
+    books: [],
+    search: ""
+  };
 
-    state = {
-        books: [],
-        title: "",
-        author: "",
-        description: ""
-      };
-    
-      componentDidMount() {
-        this.loadBooks();
-      }
-    
-      loadBooks = () => {
-        API.getBooks()
-          .then(res =>
-            this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-          )
-          .catch(err => console.log(err));
-      };
-    
-      deleteBook = id => {
-        API.deleteBook(id)
-          .then(res => this.loadBooks())
-          .catch(err => console.log(err));
-      };
-    
-      handleInputChange = event => {
-        const { name, value } = event.target;
-        this.setState({
-          [name]: value
-        });
-      };
-    
-      handleFormSubmit = event => {
-        event.preventDefault();
-        if (this.state.title && this.state.author) {
-          API.saveBook({
-            title: this.state.title,
-            author: this.state.author,
-            synopsis: this.state.synopsis
-          })
-            .then(res => this.loadBooks())
-            .catch(err => console.log(err));
-        }
-      };
-    render() {
+  // searches the GoogleBooks API storing the data in books array
+  searchBooks = query => {
+    API.searchBooks(query)
+      .then(res =>
+        this.setState(
+          {
+            books: res.data.items,
+            search: ""
+          },
+          console.log(res.data.items)
+        )
+      )
+      .catch(err => console.log(err));
+  };
 
-        return(
-    
-    <Container fluid>
+  handleInputChange = event => {
+    const value = event.target.value;
+    const name = event.target.name;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  // once the search term is submitted, search the GoogleBooks API for the value of `this.state.search`
+  handleFormSubmit = event => {
+    event.preventDefault();
+    this.searchBooks(this.state.search);
+  };
+
+  // deletes book from database
+  deleteBook = id => {
+    API.deleteBook(id)
+      .then(res => console.log(res.status))
+      .catch(err => console.log(err));
+  };
+
+  // saves book to database
+  handleSaveBook = bookData => {
+    API.saveBook(bookData)
+      .then(res => alert("Book Saved!"))
+      .catch(err => console.log(err));
+  };
+
+  render() {
+    return (
+      <Container>
         <Row>
-          <Col size="md-6">
-            <Jumbotron>
-              <h1>Search For A Book</h1>
-            </Jumbotron>
-            <form>
-              <Input
-                value={this.state.title}
-                onChange={this.handleInputChange}
-                name="title"
-                placeholder="Title (required)"
-              />
-              <Input
-                value={this.state.author}
-                onChange={this.handleInputChange}
-                name="author"
-                placeholder="Author (required)"
-              />
-              <FormBtn
-                disabled={!(this.state.author && this.state.title)}
-                onClick={this.handleFormSubmit}
-              >
-                Submit Book
-              </FormBtn>
-            </form>
+          <Col size="md-12">
+            <Jumbotron />
           </Col>
-           
         </Row>
-
-{/* <Row>
-<Col md={12}>
-      <h3>
-        <strong>
-         Results
-        </strong>
-      </h3>
-
-
-</Col>
-</Row> */}
-
-</Container>
-
+        <Row>
+          <Col size="md-12">
+            <Card heading="Google Books Search">
+              <BookForm
+                value={this.state.search}
+                handleInputChange={this.handleInputChange}
+                handleFormSubmit={this.handleFormSubmit}
+              />
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col size="md-12">
+            {this.state.books.length ? (
+              <Card heading="Results">
+                {this.state.books.map(book => (
+                  <Booksz
+                    key={book.id}
+                    src={book.volumeInfo.imageLinks 
+                      ? book.volumeInfo.imageLinks.thumbnail
+                      : "http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/book-icon.png"}
+                    title={book.volumeInfo.title}
+                    authors={book.volumeInfo.authors
+                      ? book.volumeInfo.authors.join(", ")
+                      : "N/A"}
+                    date={book.volumeInfo.publishedDate}
+                    description={book.volumeInfo.description}
+                    link={book.volumeInfo.infoLink}
+                    handleSaveBook={() => this.handleSaveBook({ 
+                      title: book.volumeInfo.title,
+                      src: book.volumeInfo.imageLinks 
+                        ? book.volumeInfo.imageLinks.thumbnail 
+                        : "http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/book-icon.png",
+                      authors: book.volumeInfo.authors,
+                      date: book.volumeInfo.publishedDate,
+                      description: book.volumeInfo.description,
+                      link: book.volumeInfo.infoLink})}
+                  />
+                ))}
+              </Card>
+            ) : (
+              <Card heading="Search Results"></Card>
+            )}
+          </Col>
+        </Row>
+      </Container>
     );
-  }}
+  }
+}
 
-
-
-export default Search;
+export default Books;
