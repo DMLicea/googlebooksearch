@@ -17,3 +17,8 @@
 * * * Axios
 * * * CSS
 * * * JavaSctopt
+
+* * ![alt text](img/img1.png "Description goes here")
+* * ![alt text](img/img2.png "Description goes here")
+
+https://stormy-fortress-32037.herokuapp.com/
